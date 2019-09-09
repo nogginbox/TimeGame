@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Garsonix.TimeGame.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Garsonix.TimeGame.UWP"
+    RequestedTheme="Light">
+
+</Application>
