@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="clr-namespace:Garsonix.TimeGame.Controls;assembly=Garsonix.TimeGame"
              mc:Ignorable="d"
              x:Class="Garsonix.TimeGame.MainPage">
 
@@ -26,6 +27,33 @@
 
             <Label Text="Which clock says 3 o'clock." />
         </StackLayout>
+
+        <!-- Top Left -->
+        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
+            Grid.Row="1"
+            WidthRequest="400" HeightRequest="400"
+            HorizontalOptions="Center" VerticalOptions="Center"  />
+
+        <!-- Top Right -->
+        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
+            Grid.Row="1" Grid.Column="1"
+            WidthRequest="400" HeightRequest="400"
+            HorizontalOptions="Center" VerticalOptions="Center"  />
+
+
+        <!-- Bottom Left -->
+        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
+            Grid.Row="2"
+            WidthRequest="400" HeightRequest="400"
+            HorizontalOptions="Center" VerticalOptions="Center"  />
+
+        <!-- Bottom Right -->
+        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
+            Grid.Row="2" Grid.Column="1"
+            WidthRequest="400" HeightRequest="400"
+            HorizontalOptions="Center" VerticalOptions="Center"  />
+            
+        
         
         
     </Grid>
