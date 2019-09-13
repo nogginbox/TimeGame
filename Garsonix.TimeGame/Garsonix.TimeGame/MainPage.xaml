@@ -29,27 +29,23 @@
         </StackLayout>
 
         <!-- Top Left -->
-        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
-            Grid.Row="1"
+        <ext:Clock Grid.Row="1"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center"  />
 
         <!-- Top Right -->
-        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
-            Grid.Row="1" Grid.Column="1"
+        <ext:Clock Grid.Row="1" Grid.Column="1"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center"  />
 
 
         <!-- Bottom Left -->
-        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
-            Grid.Row="2"
+        <ext:Clock Grid.Row="2"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center"  />
 
         <!-- Bottom Right -->
-        <ext:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.clock.svg"
-            Grid.Row="2" Grid.Column="1"
+        <ext:Clock Grid.Row="2" Grid.Column="1"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center"  />
             

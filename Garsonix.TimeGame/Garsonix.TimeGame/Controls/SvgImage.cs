@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace Garsonix.TimeGame.Controls
 {
+
     public class SvgImage : Frame
     {
         private readonly SKCanvasView _canvasView = new SKCanvasView();
