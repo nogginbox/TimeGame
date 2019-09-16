@@ -11,13 +11,18 @@
 
   <ItemGroup>
     <None Remove="Content\Images\clock.svg" />
+    <None Remove="Content\Images\clock_big_hand.svg" />
+    <None Remove="Content\Images\clock_little_hand.svg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Content\Images\clock.svg" />
+    <EmbeddedResource Include="Content\Images\clock_big_hand.svg" />
+    <EmbeddedResource Include="Content\Images\clock_little_hand.svg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NodaTime" Version="2.4.7" />
     <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />

@@ -24,6 +24,11 @@ namespace Garsonix.TimeGame.Controls
             _canvasView.PaintSurface += CanvasViewOnPaintSurface;
         }
 
+        public SvgImage(string resourceId) : this()
+        {
+            ResourceId = resourceId;
+        }
+
         public static readonly BindableProperty IconFilePathProperty = BindableProperty.Create(
             nameof(ResourceId),
             typeof(string),
