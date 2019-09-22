@@ -30,28 +30,30 @@
 
         <!-- Top Left -->
         <ext:Clock Grid.Row="1"
+            Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center"  />
+            HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Top Right -->
         <ext:Clock Grid.Row="1" Grid.Column="1"
+            Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center"  />
+            HorizontalOptions="Center" VerticalOptions="Center" />
 
 
         <!-- Bottom Left -->
         <ext:Clock Grid.Row="2"
+            Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center"  />
+            HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Bottom Right -->
         <ext:Clock Grid.Row="2" Grid.Column="1"
+            Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center"  />
-            
-        
-        
-        
+            HorizontalOptions="Center" VerticalOptions="Center" />
+
+
     </Grid>
 
 </ContentPage>

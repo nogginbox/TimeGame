@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Garsonix.TimeGame.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,17 @@ namespace Garsonix.TimeGame
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private async void ClockClicked(object sender, EventArgs e)
+        {
+            if (!(sender is Clock clock))
+            {
+                throw new Exception($"{sender.GetType()} is not a Clock");
+            }
+
+            var a = clock.Time;
+            await DisplayAlert("The Time", a.ToString(), "Yes");
         }
     }
 }
