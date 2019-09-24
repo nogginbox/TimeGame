@@ -10,7 +10,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
+    <None Remove="Content\Images\clock.svg" />
+    <None Remove="Content\Images\clock_big_hand.svg" />
+    <None Remove="Content\Images\clock_little_hand.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Images\clock.svg" />
+    <EmbeddedResource Include="Content\Images\clock_big_hand.svg" />
+    <EmbeddedResource Include="Content\Images\clock_little_hand.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NodaTime" Version="2.4.7" />
+    <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.0" />
   </ItemGroup>
 </Project>
