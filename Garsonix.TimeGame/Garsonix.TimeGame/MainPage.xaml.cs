@@ -1,10 +1,8 @@
 ﻿using Garsonix.TimeGame.Controls;
+using Garsonix.TimeGame.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame
@@ -14,9 +12,18 @@ namespace Garsonix.TimeGame
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private readonly IReadOnlyList<Clock> _clocks;
+        private readonly TimeFactory _timeFactory;
+
         public MainPage()
         {
             InitializeComponent();
+            _timeFactory = new TimeFactory();
+            _clocks = new List<Clock>
+            {
+                Clock1, Clock2, Clock3, Clock4
+            };
+            SetTimes();
         }
 
         private async void ClockClicked(object sender, EventArgs e)
@@ -28,6 +35,14 @@ namespace Garsonix.TimeGame
 
             var a = clock.Time;
             await DisplayAlert("The Time", a.ToString(), "Yes");
+        }
+
+        private void SetTimes()
+        {
+            foreach(var clock in _clocks)
+            {
+                clock.Time = _timeFactory.Random();
+            }
         }
     }
 }
