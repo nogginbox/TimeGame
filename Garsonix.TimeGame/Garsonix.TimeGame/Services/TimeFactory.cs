@@ -1,13 +1,25 @@
-﻿using System;
-using NodaTime;
+﻿using NodaTime;
+using System;
+using System.Collections.Generic;
 
 namespace Garsonix.TimeGame.Services
 {
     public class TimeFactory
     {
-        public LocalTime Random()
+        private readonly Random _rnd;
+
+        public TimeFactory()
         {
-            return new LocalTime(DateTime.Now.Hour, DateTime.Now.Minute);
+            _rnd = new Random();  
+        }
+
+        public LocalTime Random(IList<int> possibleMinutes)
+        {
+            var hour = _rnd.Next(0, 23);
+            var mins = possibleMinutes.Count > 0
+                ? possibleMinutes[_rnd.Next(0, possibleMinutes.Count - 1)]
+                : 0;
+            return new LocalTime(hour, mins);
         }
     }
 }

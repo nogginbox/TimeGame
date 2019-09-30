@@ -1,5 +1,6 @@
 ﻿using Garsonix.TimeGame.Controls;
 using Garsonix.TimeGame.Services;
+using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Garsonix.TimeGame
     {
         private readonly IReadOnlyList<Clock> _clocks;
         private readonly TimeFactory _timeFactory;
+
+        private LocalTime _theTime;
 
         public MainPage()
         {
@@ -41,7 +44,7 @@ namespace Garsonix.TimeGame
         {
             foreach(var clock in _clocks)
             {
-                clock.Time = _timeFactory.Random();
+                clock.Time = _timeFactory.Random(new[] {0, 30 });
             }
         }
     }
