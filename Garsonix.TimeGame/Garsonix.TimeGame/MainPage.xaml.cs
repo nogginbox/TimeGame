@@ -40,12 +40,10 @@ namespace Garsonix.TimeGame
 
             var isCorrect = clock.Time == _theTime;
             var msg = isCorrect
-                ? "Well done"
-                : "Try again";
+                ? (text: "Well done", button: "Next")
+                : (text: $"No. That clock says {clock.Time.ToWordyString()}", button: "Try again");
 
-            // Todo: Wrong answer: Tell them what time the clock says
-
-            await DisplayAlert("The Time", msg, "Yes");
+            await DisplayAlert("The Time", msg.text, msg.button);
 
             if (isCorrect)
             {
