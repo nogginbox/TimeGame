@@ -17,7 +17,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <!-- Banner -->
         <StackLayout Grid.ColumnSpan="2">
             <Label Text="Time Game"
@@ -25,34 +25,32 @@
                 VerticalOptions="CenterAndExpand"
                 FontSize="Header"/>
 
-            <Label Text="Which clock says 3 o'clock." />
+            <Label x:Name="TimeQuestion" />
         </StackLayout>
 
         <!-- Top Left -->
-        <ext:Clock Grid.Row="1"
+        <ext:Clock x:Name="Clock1" Grid.Row="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Top Right -->
-        <ext:Clock Grid.Row="1" Grid.Column="1"
+        <ext:Clock x:Name="Clock2" Grid.Row="1" Grid.Column="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
-
         <!-- Bottom Left -->
-        <ext:Clock Grid.Row="2"
+        <ext:Clock x:Name="Clock3" Grid.Row="2"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Bottom Right -->
-        <ext:Clock Grid.Row="2" Grid.Column="1"
+        <ext:Clock x:Name="Clock4" Grid.Row="2" Grid.Column="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center" />
-
+            HorizontalOptions="Center" VerticalOptions="Center"  />
 
     </Grid>
 
