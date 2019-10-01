@@ -25,7 +25,7 @@
                 VerticalOptions="CenterAndExpand"
                 FontSize="Header"/>
 
-            <Label Text="Which clock says 3 o'clock." />
+            <Label x:Name="TimeQuestion" />
         </StackLayout>
 
         <!-- Top Left -->

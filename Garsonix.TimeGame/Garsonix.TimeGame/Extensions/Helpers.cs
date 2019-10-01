@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Garsonix.TimeGame.Services
+namespace Garsonix.TimeGame.Extensions
 {
     public static class Helpers
     {

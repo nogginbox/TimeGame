@@ -1,4 +1,5 @@
 ﻿using Garsonix.TimeGame.Controls;
+using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Services;
 using NodaTime;
 using System;
@@ -15,6 +16,7 @@ namespace Garsonix.TimeGame
     {
         private readonly IReadOnlyList<Clock> _clocks;
         private readonly TimeFactory _timeFactory;
+        private readonly Random _rnd = new Random();
 
         private LocalTime _theTime;
 
@@ -36,8 +38,16 @@ namespace Garsonix.TimeGame
                 throw new Exception($"{sender.GetType()} is not a Clock");
             }
 
-            var a = clock.Time;
-            await DisplayAlert("The Time", a.ToString(), "Yes");
+            var isCorrect = clock.Time == _theTime;
+            var msg = isCorrect
+                ? "Well done"
+                : "Try again";
+            await DisplayAlert("The Time", msg, "Yes");
+
+            if (isCorrect)
+            {
+                SetTimes();
+            }
         }
 
         private void SetTimes()
@@ -46,6 +56,8 @@ namespace Garsonix.TimeGame
             {
                 clock.Time = _timeFactory.Random(new[] {0, 30 });
             }
+            _theTime = _clocks[_rnd.Next(0, 3)].Time;
+            TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";
         }
     }
 }
