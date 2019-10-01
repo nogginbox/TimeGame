@@ -42,6 +42,9 @@ namespace Garsonix.TimeGame
             var msg = isCorrect
                 ? "Well done"
                 : "Try again";
+
+            // Todo: Wrong answer: Tell them what time the clock says
+
             await DisplayAlert("The Time", msg, "Yes");
 
             if (isCorrect)
@@ -54,7 +57,7 @@ namespace Garsonix.TimeGame
         {
             foreach(var clock in _clocks)
             {
-                clock.Time = _timeFactory.Random(new[] {0, 30 });
+                clock.Time = _timeFactory.Random(new[] {0, 30 }, true);
             }
             _theTime = _clocks[_rnd.Next(0, 3)].Time;
             TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";

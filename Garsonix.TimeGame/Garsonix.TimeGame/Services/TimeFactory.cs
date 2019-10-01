@@ -13,9 +13,10 @@ namespace Garsonix.TimeGame.Services
             _rnd = new Random();  
         }
 
-        public LocalTime Random(IList<int> possibleMinutes)
+        public LocalTime Random(IList<int> possibleMinutes, bool justMorning)
         {
-            var hour = _rnd.Next(0, 23);
+            var maxHours = justMorning ? 11 : 23;
+            var hour = _rnd.Next(0, maxHours);
             var mins = possibleMinutes.Count > 0
                 ? possibleMinutes[_rnd.Next(0, possibleMinutes.Count - 1)]
                 : 0;
