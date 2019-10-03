@@ -8,6 +8,7 @@ namespace Garsonix.TimeGame.Controls
     {
         private readonly SvgImage _clockHandHour;
         private readonly SvgImage _clockHandMinute;
+        private static readonly Color DisabledColour = Color.FromRgba(20, 20, 20, 50);
 
         private EventHandler _click;
 
@@ -22,17 +23,8 @@ namespace Garsonix.TimeGame.Controls
             _clockHandMinute = new SvgImage("Garsonix.TimeGame.Content.Images.clock_big_hand.svg");
             Children.Add(_clockHandMinute);
 
-            Time = new LocalTime(3, 30);
-
-            // Your label tap event
-            var forgetPassword_tap = new TapGestureRecognizer();
-            forgetPassword_tap.Tapped += (s, e) =>
-            {
-                //
-                //  Do your work here.
-                //
-            };
-            GestureRecognizers.Add(forgetPassword_tap);
+            // Default Time
+            Time = new LocalTime();
         }
 
         public event EventHandler Clicked
@@ -43,7 +35,12 @@ namespace Garsonix.TimeGame.Controls
                 {
                     _click += value;
                     var g = new TapGestureRecognizer();
-                    g.Tapped += (s, e) => _click?.Invoke(s, e);
+                    g.Tapped += (s, e) => {
+                        if (Enabled)
+                        {
+                            _click?.Invoke(s, e);
+                        }
+                    };
                     GestureRecognizers.Add(g);
                 }
             }
@@ -56,6 +53,23 @@ namespace Garsonix.TimeGame.Controls
                 }
             }
         }
+
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+            set
+            { 
+                _enabled = value;
+                BackgroundColor = _enabled
+                    ? Color.Transparent
+                    : DisabledColour;
+            }
+        }
+        private bool _enabled = true;
+
 
         public LocalTime Time {
             get

@@ -39,10 +39,14 @@ namespace Garsonix.TimeGame
             }
 
             var isCorrect = clock.Time == _theTime;
+            if(!isCorrect)
+            {
+                clock.Enabled = false;
+            }
+
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
                 : (text: $"No. That clock says {clock.Time.ToWordyString()}", button: "Try again");
-
             await DisplayAlert("The Time", msg.text, msg.button);
 
             if (isCorrect)
@@ -56,6 +60,7 @@ namespace Garsonix.TimeGame
             foreach(var clock in _clocks)
             {
                 clock.Time = _timeFactory.Random(new[] {0, 30 }, true);
+                clock.Enabled = true;
             }
             _theTime = _clocks[_rnd.Next(0, 3)].Time;
             TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";

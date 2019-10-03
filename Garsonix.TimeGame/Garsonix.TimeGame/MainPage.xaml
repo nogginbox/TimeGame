@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="Garsonix.TimeGame.MainPage">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
