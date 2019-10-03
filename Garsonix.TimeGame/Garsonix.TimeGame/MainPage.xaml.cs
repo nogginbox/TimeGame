@@ -14,7 +14,7 @@ namespace Garsonix.TimeGame
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private readonly IReadOnlyList<Clock> _clocks;
+        private readonly IReadOnlyList<ClockButton> _clocks;
         private readonly TimeFactory _timeFactory;
         private readonly Random _rnd = new Random();
 
@@ -24,7 +24,7 @@ namespace Garsonix.TimeGame
         {
             InitializeComponent();
             _timeFactory = new TimeFactory();
-            _clocks = new List<Clock>
+            _clocks = new List<ClockButton>
             {
                 Clock1, Clock2, Clock3, Clock4
             };
@@ -33,16 +33,13 @@ namespace Garsonix.TimeGame
 
         private async void ClockClicked(object sender, EventArgs e)
         {
-            if (!(sender is Clock clock))
+            if (!(sender is ClockButton clock))
             {
                 throw new Exception($"{sender.GetType()} is not a Clock");
             }
 
             var isCorrect = clock.Time == _theTime;
-            if(!isCorrect)
-            {
-                clock.Enabled = false;
-            }
+            clock.SetAnswerIs(isCorrect);
 
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
@@ -60,7 +57,7 @@ namespace Garsonix.TimeGame
             foreach(var clock in _clocks)
             {
                 clock.Time = _timeFactory.Random(new[] {0, 30 }, true);
-                clock.Enabled = true;
+                clock.Reset();
             }
             _theTime = _clocks[_rnd.Next(0, 3)].Time;
             TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";

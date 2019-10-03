@@ -1,5 +1,4 @@
 ﻿using NodaTime;
-using System;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame.Controls
@@ -8,9 +7,6 @@ namespace Garsonix.TimeGame.Controls
     {
         private readonly SvgImage _clockHandHour;
         private readonly SvgImage _clockHandMinute;
-        private static readonly Color DisabledColour = Color.FromRgba(20, 20, 20, 50);
-
-        private EventHandler _click;
 
         public Clock()
         {
@@ -27,34 +23,7 @@ namespace Garsonix.TimeGame.Controls
             Time = new LocalTime();
         }
 
-        public event EventHandler Clicked
-        {
-            add
-            {
-                lock (this)
-                {
-                    _click += value;
-                    var g = new TapGestureRecognizer();
-                    g.Tapped += (s, e) => {
-                        if (Enabled)
-                        {
-                            _click?.Invoke(s, e);
-                        }
-                    };
-                    GestureRecognizers.Add(g);
-                }
-            }
-            remove
-            {
-                lock (this)
-                {
-                    _click -= value;
-                    GestureRecognizers.Clear();
-                }
-            }
-        }
-
-        public bool Enabled
+        /*public bool Enabled
         {
             get
             {
@@ -63,12 +32,9 @@ namespace Garsonix.TimeGame.Controls
             set
             { 
                 _enabled = value;
-                BackgroundColor = _enabled
-                    ? Color.Transparent
-                    : DisabledColour;
             }
         }
-        private bool _enabled = true;
+        private bool _enabled = true;*/
 
 
         public LocalTime Time {
