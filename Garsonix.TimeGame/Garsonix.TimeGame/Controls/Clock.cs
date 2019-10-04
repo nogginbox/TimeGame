@@ -1,5 +1,4 @@
 ﻿using NodaTime;
-using System;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame.Controls
@@ -8,8 +7,6 @@ namespace Garsonix.TimeGame.Controls
     {
         private readonly SvgImage _clockHandHour;
         private readonly SvgImage _clockHandMinute;
-
-        private EventHandler _click;
 
         public Clock()
         {
@@ -22,40 +19,23 @@ namespace Garsonix.TimeGame.Controls
             _clockHandMinute = new SvgImage("Garsonix.TimeGame.Content.Images.clock_big_hand.svg");
             Children.Add(_clockHandMinute);
 
-            Time = new LocalTime(3, 30);
-
-            // Your label tap event
-            var forgetPassword_tap = new TapGestureRecognizer();
-            forgetPassword_tap.Tapped += (s, e) =>
-            {
-                //
-                //  Do your work here.
-                //
-            };
-            GestureRecognizers.Add(forgetPassword_tap);
+            // Default Time
+            Time = new LocalTime();
         }
 
-        public event EventHandler Clicked
+        /*public bool Enabled
         {
-            add
+            get
             {
-                lock (this)
-                {
-                    _click += value;
-                    var g = new TapGestureRecognizer();
-                    g.Tapped += (s, e) => _click?.Invoke(s, e);
-                    GestureRecognizers.Add(g);
-                }
+                return _enabled;
             }
-            remove
-            {
-                lock (this)
-                {
-                    _click -= value;
-                    GestureRecognizers.Clear();
-                }
+            set
+            { 
+                _enabled = value;
             }
         }
+        private bool _enabled = true;*/
+
 
         public LocalTime Time {
             get

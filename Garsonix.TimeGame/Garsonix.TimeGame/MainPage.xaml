@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="Garsonix.TimeGame.MainPage">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -29,25 +29,25 @@
         </StackLayout>
 
         <!-- Top Left -->
-        <ext:Clock x:Name="Clock1" Grid.Row="1"
+        <ext:ClockButton x:Name="Clock1" Grid.Row="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Top Right -->
-        <ext:Clock x:Name="Clock2" Grid.Row="1" Grid.Column="1"
+        <ext:ClockButton x:Name="Clock2" Grid.Row="1" Grid.Column="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Bottom Left -->
-        <ext:Clock x:Name="Clock3" Grid.Row="2"
+        <ext:ClockButton x:Name="Clock3" Grid.Row="2"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Bottom Right -->
-        <ext:Clock x:Name="Clock4" Grid.Row="2" Grid.Column="1"
+        <ext:ClockButton x:Name="Clock4" Grid.Row="2" Grid.Column="1"
             Clicked="ClockClicked"
             WidthRequest="400" HeightRequest="400"
             HorizontalOptions="Center" VerticalOptions="Center"  />
