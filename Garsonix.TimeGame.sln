@@ -11,7 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garsonix.TimeGame.iOS", "Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garsonix.TimeGame", "Garsonix.TimeGame\Garsonix.TimeGame\Garsonix.TimeGame.csproj", "{36CD761C-05AD-40DE-814C-EE3502A088D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garsonix.TimeGame.Tests", "Garsonix.TimeGame\Garsonix.TimeGame.Tests\Garsonix.TimeGame.Tests.csproj", "{1B05385D-F999-4263-A92D-3BB205198883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garsonix.TimeGame.Tests", "Garsonix.TimeGame\Garsonix.TimeGame.Tests\Garsonix.TimeGame.Tests.csproj", "{1B05385D-F999-4263-A92D-3BB205198883}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution", "_solution", "{93B9827B-4024-449D-A46E-A846810DF51F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

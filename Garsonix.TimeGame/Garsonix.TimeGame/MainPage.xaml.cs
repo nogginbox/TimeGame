@@ -1,5 +1,6 @@
 ﻿using Garsonix.TimeGame.Controls;
 using Garsonix.TimeGame.Extensions;
+using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
 using NodaTime;
 using System;
@@ -15,15 +16,21 @@ namespace Garsonix.TimeGame
     public partial class MainPage : ContentPage
     {
         private readonly IReadOnlyList<ClockButton> _clocks;
+        private readonly LevelFactory _levelFactory;
         private readonly TimeFactory _timeFactory;
         private readonly Random _rnd = new Random();
 
         private LocalTime _theTime;
+        private Level _level;
+        private int _tries = 0;
 
         public MainPage()
         {
             InitializeComponent();
+
+            _levelFactory = new LevelFactory();
             _timeFactory = new TimeFactory();
+            _level = _levelFactory.Create(1);
             _clocks = new List<ClockButton>
             {
                 Clock1, Clock2, Clock3, Clock4
@@ -38,6 +45,8 @@ namespace Garsonix.TimeGame
                 throw new Exception($"{sender.GetType()} is not a Clock");
             }
 
+            _tries++;
+
             var isCorrect = clock.Time == _theTime;
             clock.SetAnswerIs(isCorrect);
 
@@ -49,6 +58,15 @@ namespace Garsonix.TimeGame
             if (isCorrect)
             {
                 SetTimes();
+                _level.RightAfter(_tries, 4);
+                if(_level.IsComplete)
+                {
+                    // Todo:
+                    // * Show different screen with stars for level on
+                    // * Keep levels completed
+                    _level = _levelFactory.Next(_level);
+                }
+                _tries = 0;
             }
         }
 
@@ -56,7 +74,7 @@ namespace Garsonix.TimeGame
         {
             foreach(var clock in _clocks)
             {
-                clock.Time = _timeFactory.Random(new[] {0, 30 }, true);
+                clock.Time = _timeFactory.Random(_level.PossibleMinutes, true);
                 clock.Reset();
             }
             _theTime = _clocks[_rnd.Next(0, 3)].Time;
