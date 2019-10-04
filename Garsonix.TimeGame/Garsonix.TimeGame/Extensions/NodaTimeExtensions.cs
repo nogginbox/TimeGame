@@ -6,8 +6,6 @@ namespace Garsonix.TimeGame.Extensions
     {
         public static string ToWordyString(this LocalTime time)
         {
-            
-
             switch(time.Minute)
             {
                 case 0:
@@ -17,7 +15,7 @@ namespace Garsonix.TimeGame.Extensions
                 case 30:
                     return $"Half past {Hour(time)}";
                 default:
-                    return $"{time.Minute} {PlaceWord(time.Minute)} {Hour(time)}";
+                    return $"{Minute(time)} {PlaceWord(time.Minute)} {Hour(time)}";
             }
 
         }
@@ -28,8 +26,8 @@ namespace Garsonix.TimeGame.Extensions
         private static string PlaceWord(int minute)
         {
             return minute > 30
-                ? "past"
-                : "to";
+                ? "to"
+                : "past";
         }
 
         private static int Hour(LocalTime time)
@@ -42,6 +40,13 @@ namespace Garsonix.TimeGame.Extensions
                 ? hour
                 : 12;
             return hour;
+        }
+
+        private static int Minute(LocalTime time)
+        {
+            return time.Minute > 30
+                ? 60 - time.Minute
+                : time.Minute;
         }
 
     }
