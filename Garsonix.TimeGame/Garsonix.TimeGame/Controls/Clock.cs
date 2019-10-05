@@ -8,6 +8,8 @@ namespace Garsonix.TimeGame.Controls
         private readonly SvgImage _clockHandHour;
         private readonly SvgImage _clockHandMinute;
 
+        private const double MinutesInHalfDay = 12d * 60d;
+
         public Clock()
         {
             var clockFace = new SvgImage("Garsonix.TimeGame.Content.Images.clock.svg");
@@ -45,7 +47,7 @@ namespace Garsonix.TimeGame.Controls
             set
             {
                 _time = value;
-                _clockHandHour.Rotation = _time.Hour / 12.0 * 360.0;
+                _clockHandHour.Rotation = ((_time.Hour % 12 * 60d) + _time.Minute) / MinutesInHalfDay * 360.0;
                 _clockHandMinute.Rotation = _time.Minute / 60.0 *360.0;
             }
         }
