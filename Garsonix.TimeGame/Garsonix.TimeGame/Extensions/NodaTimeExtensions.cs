@@ -11,9 +11,10 @@ namespace Garsonix.TimeGame.Extensions
                 case 0:
                     return $"{Hour(time)} o'clock";
                 case 15:
+                case 45:
                     return $"quarter {PlaceWord(time.Minute)} {Hour(time)}";
                 case 30:
-                    return $"Half past {Hour(time)}";
+                    return $"half past {Hour(time)}";
                 default:
                     return $"{Minute(time)} {PlaceWord(time.Minute)} {Hour(time)}";
             }
