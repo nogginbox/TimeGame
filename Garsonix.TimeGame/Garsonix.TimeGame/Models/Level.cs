@@ -17,7 +17,9 @@ namespace Garsonix.TimeGame.Models
 
         public bool IsComplete => QuestionsAsked >= 10;
 
-        public float Percentage => Score / (float)_scorePossible;
+        public float Percentage => _scorePossible > 0
+            ? (Score / (float)_scorePossible) * 100f
+            : 0;
 
         public IList<int> PossibleMinutes { get; }
 

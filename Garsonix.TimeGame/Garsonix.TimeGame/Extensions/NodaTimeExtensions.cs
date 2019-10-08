@@ -4,6 +4,9 @@ namespace Garsonix.TimeGame.Extensions
 {
     public static class NodaTimeExtensions
     {
+        /// <summary>
+        /// The English word description of the time
+        /// </summary>
         public static string ToWordyString(this LocalTime time)
         {
             switch(time.Minute)
@@ -22,7 +25,7 @@ namespace Garsonix.TimeGame.Extensions
         }
 
         /// <summary>
-        /// Are the minutes to or from the hour
+        /// Are the minutes 'to' or 'from' the hour
         /// </summary>
         private static string PlaceWord(int minute)
         {
@@ -43,12 +46,14 @@ namespace Garsonix.TimeGame.Extensions
             return hour;
         }
 
+        /// <summary>
+        /// The number of minutes (0-30) to or from the hour
+        /// </summary>
         private static int Minute(LocalTime time)
         {
             return time.Minute > 30
                 ? 60 - time.Minute
                 : time.Minute;
         }
-
     }
 }

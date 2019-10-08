@@ -61,9 +61,13 @@ namespace Garsonix.TimeGame
                 _level.RightAfter(_tries, 4);
                 if(_level.IsComplete)
                 {
+                    // Show level score
                     // Todo:
-                    // * Show different screen with stars for level on
-                    // * Keep levels completed
+                    // * Show nicer overlay screen with stars for level on
+                    await DisplayAlert($"Level {_level.Difficulty}", $"You scored {_level.Percentage}%", "Continue");
+
+                    // Increase level
+                    // Todo:
                     _level = _levelFactory.Next(_level);
                 }
                 _tries = 0;
