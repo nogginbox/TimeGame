@@ -47,8 +47,9 @@ namespace Garsonix.TimeGame.Controls
             set
             {
                 _time = value;
-                _clockHandHour.Rotation = ((_time.Hour % 12 * 60d) + _time.Minute) / MinutesInHalfDay * 360.0;
-                _clockHandMinute.Rotation = _time.Minute / 60.0 *360.0;
+                // Adding 0.01 to rotation to fix forms bug that seems to ignore zero rotation
+                _clockHandHour.Rotation = ((_time.Hour % 12 * 60d) + _time.Minute) / MinutesInHalfDay * 360.0 + 0.01;
+                _clockHandMinute.Rotation = _time.Minute / 60.0 * 360.0 + 0.01;
             }
         }
 
