@@ -57,7 +57,6 @@ namespace Garsonix.TimeGame
 
             if (isCorrect)
             {
-                SetTimes();
                 _level.RightAfter(_tries, 4);
                 if(_level.IsComplete)
                 {
@@ -70,6 +69,9 @@ namespace Garsonix.TimeGame
                     // Todo:
                     _level = _levelFactory.Next(_level);
                 }
+                
+                // Start next level
+                SetTimes();
                 _tries = 0;
             }
         }
