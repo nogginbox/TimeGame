@@ -6,6 +6,7 @@ using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame
@@ -15,7 +16,6 @@ namespace Garsonix.TimeGame
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private readonly IReadOnlyList<ClockButton> _clocks;
         private readonly LevelFactory _levelFactory;
         private readonly TimeFactory _timeFactory;
         private readonly Random _rnd = new Random();
@@ -31,10 +31,7 @@ namespace Garsonix.TimeGame
             _levelFactory = new LevelFactory();
             _timeFactory = new TimeFactory();
             _level = _levelFactory.Create(1);
-            _clocks = new List<ClockButton>
-            {
-                Clock1, Clock2, Clock3, Clock4
-            };
+            
             SetTimes();
         }
 
@@ -78,13 +75,10 @@ namespace Garsonix.TimeGame
 
         private void SetTimes()
         {
-            foreach(var clock in _clocks)
-            {
-                clock.Time = _timeFactory.Random(_level.PossibleMinutes, true);
-                clock.Reset();
-            }
-            _theTime = _clocks[_rnd.Next(0, 3)].Time;
-            TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";
+            var times = Helpers.Generate(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
+            GameClocks.SetClockTimes(times);
+            _theTime = times[_rnd.Next(0, 3)];
+            GameClocks.SetQuestion($"Which clock says {_theTime.ToWordyString()}");
         }
     }
 }
