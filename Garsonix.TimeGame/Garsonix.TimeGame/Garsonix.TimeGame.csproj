@@ -35,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\GameClocksPanel2.xaml.cs">
+      <DependentUpon>GameClocksPanel2.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\GameClocksPanel1.xaml.cs">
       <DependentUpon>GameClocksPanel1.xaml</DependentUpon>
     </Compile>

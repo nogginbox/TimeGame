@@ -3,6 +3,7 @@ using Garsonix.TimeGame.Extensions;
 using NodaTime;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,18 +11,20 @@ namespace Garsonix.TimeGame.Controls
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GameClocksPanel1 : ContentView, IGameClocksPanel
+    public partial class GameClocksPanel2 : ContentView, IGameClocksPanel
     {
-        private readonly IReadOnlyList<ClockButton> _clocks;
+        private readonly IReadOnlyList<Button> _timeButtons;
 
-        public GameClocksPanel1()
+        public GameClocksPanel2()
         {
             InitializeComponent();
-            _clocks = new List<ClockButton>
+            _timeButtons = new List<Button>
             {
-                Clock1, Clock2, Clock3, Clock4
+                Time1, Time2, Time3, Time4
             };
         }
+
+        private EventHandler<TimeChosenEventArgs> _onTimeSelected;
 
         public View View => this;
 
@@ -36,7 +39,6 @@ namespace Garsonix.TimeGame.Controls
                 _onTimeSelected = null;
             }
         }
-        private EventHandler<TimeChosenEventArgs> _onTimeSelected;
 
         public void SetClockTimes(IList<LocalTime> times)
         {
@@ -47,25 +49,31 @@ namespace Garsonix.TimeGame.Controls
 
             for (var i = 0; i < 4; i++)
             {
-                _clocks[i].Reset();
-                _clocks[i].Time = times[i];
+                _timeButtons[i].CommandParameter = times[i];
+                _timeButtons[i].Text = times[i].ToString("hh:mm", CultureInfo.InvariantCulture);
             }
         }
 
 
         public void SetQuestionTime(LocalTime time)
         {
-            TimeQuestion.Text = $"Which clock says {time.ToWordyString()}";
+            Clock.Time = time;
         }
 
         private void ClockClicked(object sender, EventArgs e)
         {
-            if (!(sender is ClockButton clock))
+            if (!(sender is Button clock))
             {
-                throw new Exception($"{sender.GetType()} is not a Clock");
+                throw new Exception($"{sender.GetType()} is not a Button");
             }
 
-            var timeEventArgs = new TimeChosenEventArgs((LocalTime)clock.Time);
+            var time = clock.CommandParameter as LocalTime?;
+            if(time == null)
+            {
+                throw new ArgumentException("Clicked thing did not have a time");
+            }
+
+            var timeEventArgs = new TimeChosenEventArgs((LocalTime)time);
 
             _onTimeSelected?.Invoke(sender, timeEventArgs);
         }

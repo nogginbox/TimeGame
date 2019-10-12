@@ -1,4 +1,5 @@
 ﻿using Garsonix.TimeGame.Controls;
+using Garsonix.TimeGame.Controls.Events;
 using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
@@ -39,6 +40,7 @@ namespace Garsonix.TimeGame
         {
             var gamePanels = new List<IGameClocksPanel>
             {
+                new GameClocksPanel2(),
                 new GameClocksPanel1()
             };
             // Hook up events
@@ -49,21 +51,17 @@ namespace Garsonix.TimeGame
             return gamePanels;
         }
 
-        private async void ClockClicked(object sender, EventArgs e)
+        private async void ClockClicked(object sender, TimeChosenEventArgs e)
         {
-            if (!(sender is ClockButton clock))
-            {
-                throw new Exception($"{sender.GetType()} is not a Clock");
-            }
-
             _tries++;
 
-            var isCorrect = clock.Time == _theTime;
-            clock.SetAnswerIs(isCorrect);
+            var isCorrect = e.Time == _theTime;
+            //todo: remimplement so eventargs has function to let us do this
+            //clock.SetAnswerIs(isCorrect);
 
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
-                : (text: $"No. That clock says {clock.Time.ToWordyString()}", button: "Try again");
+                : (text: $"No. That clock says {e.Time.ToWordyString()}", button: "Try again");
             await DisplayAlert("The Time", msg.text, msg.button);
 
             if (isCorrect)
