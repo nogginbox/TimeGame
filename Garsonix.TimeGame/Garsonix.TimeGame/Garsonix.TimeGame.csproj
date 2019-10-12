@@ -35,13 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\Game1Clocks.xaml.cs">
-      <DependentUpon>Game1Clocks.xaml</DependentUpon>
+    <Compile Update="Controls\GameClocksPanel1.xaml.cs">
+      <DependentUpon>GameClocksPanel1.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\Game1Clocks.xaml">
+    <EmbeddedResource Update="Controls\GameClocksPanel1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

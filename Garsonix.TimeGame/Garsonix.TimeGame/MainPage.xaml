@@ -13,7 +13,7 @@
             VerticalOptions="CenterAndExpand"
             FontSize="Header" />
 
-        <ext:GameClocks1 x:Name="GameClocks" TimeClicked="ClockClicked" />
+        <ContentView x:Name="GameClockPanel" />
     </StackLayout>
 
 </ContentPage>

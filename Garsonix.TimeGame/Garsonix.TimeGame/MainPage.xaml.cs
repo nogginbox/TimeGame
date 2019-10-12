@@ -27,12 +27,26 @@ namespace Garsonix.TimeGame
         public MainPage()
         {
             InitializeComponent();
-
-            _levelFactory = new LevelFactory();
+            var panels = SetupGamePanels();
+            _levelFactory = new LevelFactory(panels);
             _timeFactory = new TimeFactory();
             _level = _levelFactory.Create(1);
-            
-            SetTimes();
+
+            SetTimes(_level);
+        }
+
+        private List<IGameClocksPanel> SetupGamePanels()
+        {
+            var gamePanels = new List<IGameClocksPanel>
+            {
+                new GameClocksPanel1()
+            };
+            // Hook up events
+            foreach(var panel in gamePanels)
+            {
+                panel.TimeClicked += ClockClicked;
+            }
+            return gamePanels;
         }
 
         private async void ClockClicked(object sender, EventArgs e)
@@ -68,17 +82,18 @@ namespace Garsonix.TimeGame
                 }
                 
                 // Start next level
-                SetTimes();
+                SetTimes(_level);
                 _tries = 0;
             }
         }
 
-        private void SetTimes()
+        private void SetTimes(Level level)
         {
             var times = Helpers.Generate(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
-            GameClocks.SetClockTimes(times);
+            level.GamePanel.SetClockTimes(times);
             _theTime = times[_rnd.Next(0, 3)];
-            GameClocks.SetQuestion($"Which clock says {_theTime.ToWordyString()}");
+            level.GamePanel.SetQuestionTime(_theTime);
+            GameClockPanel.Content = _level.GamePanel.View;
         }
     }
 }

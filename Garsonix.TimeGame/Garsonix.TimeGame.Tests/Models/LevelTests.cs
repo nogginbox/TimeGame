@@ -9,7 +9,7 @@ namespace Garsonix.TimeGame.Tests.Models
         public void ScoreTest()
         {
             // arrange
-            var level = new Level(1, new[] { 0 });
+            var level = new Level(1, null, new[] { 0 });
 
             // act
             level.RightAfter(3, 4);

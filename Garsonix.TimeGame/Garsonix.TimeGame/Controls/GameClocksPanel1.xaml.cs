@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Garsonix.TimeGame.Extensions;
 using NodaTime;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Garsonix.TimeGame.Controls
 {
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GameClocks1 : ContentView
+    public partial class GameClocksPanel1 : ContentView, IGameClocksPanel
     {
         private readonly IReadOnlyList<ClockButton> _clocks;
 
-        public GameClocks1()
+        public GameClocksPanel1()
         {
             InitializeComponent();
             _clocks = new List<ClockButton>
@@ -24,6 +23,8 @@ namespace Garsonix.TimeGame.Controls
         }
 
         private EventHandler _onTimeSelected;
+
+        public View View => this;
 
         public event EventHandler TimeClicked
         {
@@ -51,9 +52,10 @@ namespace Garsonix.TimeGame.Controls
             }
         }
 
-        public void SetQuestion(string question)
+
+        public void SetQuestionTime(LocalTime time)
         {
-            TimeQuestion.Text = question;
+            TimeQuestion.Text = $"Which clock says {time.ToWordyString()}";
         }
 
         private void ClockClicked(object sender, EventArgs e)
