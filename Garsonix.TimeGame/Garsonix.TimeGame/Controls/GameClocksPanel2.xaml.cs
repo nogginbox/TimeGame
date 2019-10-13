@@ -1,5 +1,5 @@
 ﻿using Garsonix.TimeGame.Controls.Events;
-using Garsonix.TimeGame.Extensions;
+using Garsonix.TimeGame.Controls.Interfaces;
 using NodaTime;
 using System;
 using System.Collections.Generic;
@@ -11,24 +11,24 @@ namespace Garsonix.TimeGame.Controls
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GameClocksPanel2 : ContentView, IGameClocksPanel
+    public partial class GameClocksPanel2 : ContentView, IGamePanel<LocalTime>
     {
-        private readonly IReadOnlyList<Button> _timeButtons;
+        private readonly IReadOnlyList<AnswerButton> _answerButtons;
 
         public GameClocksPanel2()
         {
             InitializeComponent();
-            _timeButtons = new List<Button>
+            _answerButtons = new List<AnswerButton>
             {
                 Time1, Time2, Time3, Time4
             };
         }
 
-        private EventHandler<TimeChosenEventArgs> _onTimeSelected;
+        private EventHandler<AnsweredEventArgs<LocalTime>> _onTimeSelected;
 
         public View View => this;
 
-        public event EventHandler<TimeChosenEventArgs> TimeClicked
+        public event EventHandler<AnsweredEventArgs<LocalTime>> AnswerClicked
         {
             add
             {
@@ -49,8 +49,9 @@ namespace Garsonix.TimeGame.Controls
 
             for (var i = 0; i < 4; i++)
             {
-                _timeButtons[i].CommandParameter = times[i];
-                _timeButtons[i].Text = times[i].ToString("hh:mm", CultureInfo.InvariantCulture);
+                _answerButtons[i].Reset();
+                _answerButtons[i].CommandParameter = times[i];
+                _answerButtons[i].Text = times[i].ToString("hh:mm", CultureInfo.InvariantCulture);
             }
         }
 
@@ -73,7 +74,7 @@ namespace Garsonix.TimeGame.Controls
                 throw new ArgumentException("Clicked thing did not have a time");
             }
 
-            var timeEventArgs = new TimeChosenEventArgs((LocalTime)time);
+            var timeEventArgs = new AnsweredEventArgs<LocalTime>((LocalTime)time);
 
             _onTimeSelected?.Invoke(sender, timeEventArgs);
         }

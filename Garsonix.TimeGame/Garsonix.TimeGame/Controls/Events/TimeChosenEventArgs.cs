@@ -1,15 +1,14 @@
-﻿using NodaTime;
-using System;
+﻿using System;
 
 namespace Garsonix.TimeGame.Controls.Events
 {
-    public class TimeChosenEventArgs : EventArgs
+    public class AnsweredEventArgs<T> : EventArgs
     {
-        public readonly LocalTime Time;
+        public readonly T Answer;
 
-        public TimeChosenEventArgs(LocalTime time)
+        public AnsweredEventArgs(T answer)
         {
-            Time = time;
+            Answer = answer;
         }
     }
 }

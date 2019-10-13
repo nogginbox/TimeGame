@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Garsonix.TimeGame.Controls.Interfaces;
+using System;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame.Controls
 {
-    public class ClockButton : Clock
+    public class ClockAnswerButton : Clock, IAnswerButton
     {
         private static readonly Color DisabledColour = Color.FromRgba(20, 20, 20, 50);
         private static readonly Color WellDoneColour = Color.FromRgba(255, 255, 20, 50);

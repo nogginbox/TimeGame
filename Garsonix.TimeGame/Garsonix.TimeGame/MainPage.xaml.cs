@@ -1,5 +1,6 @@
 ﻿using Garsonix.TimeGame.Controls;
 using Garsonix.TimeGame.Controls.Events;
+using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
@@ -17,28 +18,28 @@ namespace Garsonix.TimeGame
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private readonly LevelFactory _levelFactory;
+        private readonly ILevelFactory<LocalTime> _levelFactory;
         private readonly TimeFactory _timeFactory;
         private readonly Random _rnd = new Random();
 
         private LocalTime _theTime;
-        private Level _level;
+        private Level<LocalTime> _level;
         private int _tries = 0;
 
         public MainPage()
         {
             InitializeComponent();
             var panels = SetupGamePanels();
-            _levelFactory = new LevelFactory(panels);
+            _levelFactory = new TimeLevelFactory(panels);
             _timeFactory = new TimeFactory();
             _level = _levelFactory.Create(1);
 
             SetTimes(_level);
         }
 
-        private List<IGameClocksPanel> SetupGamePanels()
+        private List<IGamePanel<LocalTime>> SetupGamePanels()
         {
-            var gamePanels = new List<IGameClocksPanel>
+            var gamePanels = new List<IGamePanel<LocalTime>>
             {
                 new GameClocksPanel2(),
                 new GameClocksPanel1()
@@ -46,22 +47,22 @@ namespace Garsonix.TimeGame
             // Hook up events
             foreach(var panel in gamePanels)
             {
-                panel.TimeClicked += ClockClicked;
+                panel.AnswerClicked += ClockClicked;
             }
             return gamePanels;
         }
 
-        private async void ClockClicked(object sender, TimeChosenEventArgs e)
+        private async void ClockClicked(object sender, AnsweredEventArgs<LocalTime> e)
         {
             _tries++;
 
-            var isCorrect = e.Time == _theTime;
-            //todo: remimplement so eventargs has function to let us do this
-            //clock.SetAnswerIs(isCorrect);
+            var isCorrect = e.Answer == _theTime;
+            var answerButton = sender as IAnswerButton;
+            answerButton.SetAnswerIs(isCorrect);
 
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
-                : (text: $"No. That clock says {e.Time.ToWordyString()}", button: "Try again");
+                : (text: $"No. That clock says {e.Answer.ToWordyString()}", button: "Try again");
             await DisplayAlert("The Time", msg.text, msg.button);
 
             if (isCorrect)
@@ -85,7 +86,7 @@ namespace Garsonix.TimeGame
             }
         }
 
-        private void SetTimes(Level level)
+        private void SetTimes(Level<LocalTime> level)
         {
             var times = Helpers.Generate(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
             level.GamePanel.SetClockTimes(times);

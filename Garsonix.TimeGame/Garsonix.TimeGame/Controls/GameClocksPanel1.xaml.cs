@@ -1,4 +1,5 @@
 ﻿using Garsonix.TimeGame.Controls.Events;
+using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Extensions;
 using NodaTime;
 using System;
@@ -10,14 +11,14 @@ namespace Garsonix.TimeGame.Controls
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GameClocksPanel1 : ContentView, IGameClocksPanel
+    public partial class GameClocksPanel1 : ContentView, IGamePanel<LocalTime>
     {
-        private readonly IReadOnlyList<ClockButton> _clocks;
+        private readonly IReadOnlyList<ClockAnswerButton> _answerButtons;
 
         public GameClocksPanel1()
         {
             InitializeComponent();
-            _clocks = new List<ClockButton>
+            _answerButtons = new List<ClockAnswerButton>
             {
                 Clock1, Clock2, Clock3, Clock4
             };
@@ -25,7 +26,7 @@ namespace Garsonix.TimeGame.Controls
 
         public View View => this;
 
-        public event EventHandler<TimeChosenEventArgs> TimeClicked
+        public event EventHandler<AnsweredEventArgs<LocalTime>> AnswerClicked
         {
             add
             {
@@ -36,7 +37,7 @@ namespace Garsonix.TimeGame.Controls
                 _onTimeSelected = null;
             }
         }
-        private EventHandler<TimeChosenEventArgs> _onTimeSelected;
+        private EventHandler<AnsweredEventArgs<LocalTime>> _onTimeSelected;
 
         public void SetClockTimes(IList<LocalTime> times)
         {
@@ -47,8 +48,8 @@ namespace Garsonix.TimeGame.Controls
 
             for (var i = 0; i < 4; i++)
             {
-                _clocks[i].Reset();
-                _clocks[i].Time = times[i];
+                _answerButtons[i].Reset();
+                _answerButtons[i].Time = times[i];
             }
         }
 
@@ -60,12 +61,12 @@ namespace Garsonix.TimeGame.Controls
 
         private void ClockClicked(object sender, EventArgs e)
         {
-            if (!(sender is ClockButton clock))
+            if (!(sender is ClockAnswerButton clock))
             {
                 throw new Exception($"{sender.GetType()} is not a Clock");
             }
 
-            var timeEventArgs = new TimeChosenEventArgs((LocalTime)clock.Time);
+            var timeEventArgs = new AnsweredEventArgs<LocalTime>(clock.Time);
 
             _onTimeSelected?.Invoke(sender, timeEventArgs);
         }

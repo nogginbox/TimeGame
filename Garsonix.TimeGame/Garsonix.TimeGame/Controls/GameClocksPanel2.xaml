@@ -28,22 +28,22 @@
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Top Left -->
-            <Button x:Name="Time1" Grid.Row="2"
+            <ext:AnswerButton x:Name="Time1" Grid.Row="2"
                     Clicked="ClockClicked"
                     HorizontalOptions="Center" VerticalOptions="Center" />
             
             <!-- Top Right -->
-            <Button x:Name="Time2" Grid.Row="2" Grid.Column="1"
+            <ext:AnswerButton x:Name="Time2" Grid.Row="2" Grid.Column="1"
                     Clicked="ClockClicked"
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Bottom Left -->
-            <Button x:Name="Time3" Grid.Row="3"
+            <ext:AnswerButton x:Name="Time3" Grid.Row="3"
                     Clicked="ClockClicked"
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Bottom Right -->
-            <Button x:Name="Time4" Grid.Row="3" Grid.Column="1"
+            <ext:AnswerButton x:Name="Time4" Grid.Row="3" Grid.Column="1"
                     Clicked="ClockClicked"
                     HorizontalOptions="Center" VerticalOptions="Center"  />
         </Grid>

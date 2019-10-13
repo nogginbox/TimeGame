@@ -23,25 +23,25 @@
             <Label x:Name="TimeQuestion">Question</Label>
 
             <!-- Top Left -->
-            <ext:ClockButton x:Name="Clock1" Grid.Row="1"
+            <ext:ClockAnswerButton x:Name="Clock1" Grid.Row="1"
                     Clicked="ClockClicked"
                     WidthRequest="400" HeightRequest="400"
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Top Right -->
-            <ext:ClockButton x:Name="Clock2" Grid.Row="1" Grid.Column="1"
+            <ext:ClockAnswerButton x:Name="Clock2" Grid.Row="1" Grid.Column="1"
                     Clicked="ClockClicked"
                     WidthRequest="400" HeightRequest="400"
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Bottom Left -->
-            <ext:ClockButton x:Name="Clock3" Grid.Row="2"
+            <ext:ClockAnswerButton x:Name="Clock3" Grid.Row="2"
                     Clicked="ClockClicked"
                     WidthRequest="400" HeightRequest="400"
                     HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Bottom Right -->
-            <ext:ClockButton x:Name="Clock4" Grid.Row="2" Grid.Column="1"
+            <ext:ClockAnswerButton x:Name="Clock4" Grid.Row="2" Grid.Column="1"
                     Clicked="ClockClicked"
                     WidthRequest="400" HeightRequest="400"
                     HorizontalOptions="Center" VerticalOptions="Center"  />
