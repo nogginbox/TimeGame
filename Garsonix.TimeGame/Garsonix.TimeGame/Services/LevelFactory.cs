@@ -10,10 +10,12 @@ namespace Garsonix.TimeGame.Services
     public class TimeLevelFactory : ILevelFactory<LocalTime>
     {
         private readonly IReadOnlyList<IGamePanel<LocalTime>> _gamePanels;
+        private readonly Random _rand;
 
         public TimeLevelFactory(IList<IGamePanel<LocalTime>> gamePanels)
         {
             _gamePanels = gamePanels.ToList();
+            _rand = new Random();
         }
 
         public Level<LocalTime> Next(Level<LocalTime> level)
@@ -51,7 +53,9 @@ namespace Garsonix.TimeGame.Services
 
         private IGamePanel<LocalTime> GetGamePanel(int difficulty)
         {
-            return _gamePanels[0];
+            // todo: don't return same game panel more than once for a difficulty level
+            var rIndex = _rand.Next(2);
+            return _gamePanels[rIndex];
         }
     }
 }

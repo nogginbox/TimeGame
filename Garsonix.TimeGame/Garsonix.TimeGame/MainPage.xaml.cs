@@ -41,8 +41,8 @@ namespace Garsonix.TimeGame
         {
             var gamePanels = new List<IGamePanel<LocalTime>>
             {
-                new GameClocksPanel2(),
-                new GameClocksPanel1()
+                new GameClocksPanel1(),
+                new GameClocksPanel2()
             };
             // Hook up events
             foreach(var panel in gamePanels)
