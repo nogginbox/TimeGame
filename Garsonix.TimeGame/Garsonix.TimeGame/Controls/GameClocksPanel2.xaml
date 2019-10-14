@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1 description, 4 analogue clocks -->
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="clr-namespace:Garsonix.TimeGame.Controls"
+             mc:Ignorable="d"
+             x:Class="Garsonix.TimeGame.Controls.GameClocksPanel2">
+    <ContentView.Content>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.ColumnSpan="2">What time is it?</Label>
+
+            <ext:Clock x:Name="Clock" Grid.Row="1" Grid.ColumnSpan="2"
+                    WidthRequest="400" HeightRequest="400"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Top Left -->
+            <ext:AnswerButton x:Name="Time1" Grid.Row="2"
+                    Clicked="ClockClicked"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+            
+            <!-- Top Right -->
+            <ext:AnswerButton x:Name="Time2" Grid.Row="2" Grid.Column="1"
+                    Clicked="ClockClicked"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Bottom Left -->
+            <ext:AnswerButton x:Name="Time3" Grid.Row="3"
+                    Clicked="ClockClicked"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Bottom Right -->
+            <ext:AnswerButton x:Name="Time4" Grid.Row="3" Grid.Column="1"
+                    Clicked="ClockClicked"
+                    HorizontalOptions="Center" VerticalOptions="Center"  />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -7,51 +7,13 @@
              mc:Ignorable="d"
              x:Class="Garsonix.TimeGame.MainPage">
 
-    <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <StackLayout Margin="10">
+        <Label Text="Time Game"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            FontSize="Header" />
 
-        <!-- Banner -->
-        <StackLayout Grid.ColumnSpan="2">
-            <Label Text="Time Game"
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand"
-                FontSize="Header"/>
-
-            <Label x:Name="TimeQuestion" />
-        </StackLayout>
-
-        <!-- Top Left -->
-        <ext:ClockButton x:Name="Clock1" Grid.Row="1"
-            Clicked="ClockClicked"
-            WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center" />
-
-        <!-- Top Right -->
-        <ext:ClockButton x:Name="Clock2" Grid.Row="1" Grid.Column="1"
-            Clicked="ClockClicked"
-            WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center" />
-
-        <!-- Bottom Left -->
-        <ext:ClockButton x:Name="Clock3" Grid.Row="2"
-            Clicked="ClockClicked"
-            WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center" />
-
-        <!-- Bottom Right -->
-        <ext:ClockButton x:Name="Clock4" Grid.Row="2" Grid.Column="1"
-            Clicked="ClockClicked"
-            WidthRequest="400" HeightRequest="400"
-            HorizontalOptions="Center" VerticalOptions="Center"  />
-
-    </Grid>
+        <ContentView x:Name="GameClockPanel" />
+    </StackLayout>
 
 </ContentPage>

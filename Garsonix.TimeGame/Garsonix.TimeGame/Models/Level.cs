@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Garsonix.TimeGame.Controls.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Garsonix.TimeGame.Models
 {
-    public class Level
+    public class Level<T>
     {
-        public Level(int difficulty, IEnumerable<int> possibleMinutes)
+        public Level(int difficulty, IGamePanel<T> gamePanel, IEnumerable<int> possibleMinutes)
         {
             Difficulty = difficulty;
+            GamePanel = gamePanel;
             PossibleMinutes = possibleMinutes.ToList();
         }
 
@@ -21,11 +21,14 @@ namespace Garsonix.TimeGame.Models
             ? (Score / (float)_scorePossible) * 100f
             : 0;
 
+        public IGamePanel<T> GamePanel { get; private set; }
+
         public IList<int> PossibleMinutes { get; }
 
         public int QuestionsAsked { get; private set; }
 
         public int Score { get; private set; }
+
         private int _scorePossible;
 
         public void RightAfter(int attemptCount, int possibleAnswerCount)

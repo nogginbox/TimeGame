@@ -1,4 +1,6 @@
 ﻿using Garsonix.TimeGame.Controls;
+using Garsonix.TimeGame.Controls.Events;
+using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
@@ -6,6 +8,7 @@ using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Garsonix.TimeGame
@@ -15,44 +18,51 @@ namespace Garsonix.TimeGame
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private readonly IReadOnlyList<ClockButton> _clocks;
-        private readonly LevelFactory _levelFactory;
+        private readonly ILevelFactory<LocalTime> _levelFactory;
         private readonly TimeFactory _timeFactory;
         private readonly Random _rnd = new Random();
 
         private LocalTime _theTime;
-        private Level _level;
+        private Level<LocalTime> _level;
         private int _tries = 0;
 
         public MainPage()
         {
             InitializeComponent();
-
-            _levelFactory = new LevelFactory();
+            var panels = SetupGamePanels();
+            _levelFactory = new TimeLevelFactory(panels);
             _timeFactory = new TimeFactory();
             _level = _levelFactory.Create(1);
-            _clocks = new List<ClockButton>
-            {
-                Clock1, Clock2, Clock3, Clock4
-            };
-            SetTimes();
+
+            SetTimes(_level);
         }
 
-        private async void ClockClicked(object sender, EventArgs e)
+        private List<IGamePanel<LocalTime>> SetupGamePanels()
         {
-            if (!(sender is ClockButton clock))
+            var gamePanels = new List<IGamePanel<LocalTime>>
             {
-                throw new Exception($"{sender.GetType()} is not a Clock");
+                new GameClocksPanel1(),
+                new GameClocksPanel2()
+            };
+            // Hook up events
+            foreach(var panel in gamePanels)
+            {
+                panel.AnswerClicked += ClockClicked;
             }
+            return gamePanels;
+        }
 
+        private async void ClockClicked(object sender, AnsweredEventArgs<LocalTime> e)
+        {
             _tries++;
 
-            var isCorrect = clock.Time == _theTime;
-            clock.SetAnswerIs(isCorrect);
+            var isCorrect = e.Answer == _theTime;
+            var answerButton = sender as IAnswerButton;
+            answerButton.SetAnswerIs(isCorrect);
 
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
-                : (text: $"No. That clock says {clock.Time.ToWordyString()}", button: "Try again");
+                : (text: $"No. That clock says {e.Answer.ToWordyString()}", button: "Try again");
             await DisplayAlert("The Time", msg.text, msg.button);
 
             if (isCorrect)
@@ -71,20 +81,18 @@ namespace Garsonix.TimeGame
                 }
                 
                 // Start next level
-                SetTimes();
+                SetTimes(_level);
                 _tries = 0;
             }
         }
 
-        private void SetTimes()
+        private void SetTimes(Level<LocalTime> level)
         {
-            foreach(var clock in _clocks)
-            {
-                clock.Time = _timeFactory.Random(_level.PossibleMinutes, true);
-                clock.Reset();
-            }
-            _theTime = _clocks[_rnd.Next(0, 3)].Time;
-            TimeQuestion.Text = $"Which clock says {_theTime.ToWordyString()}";
+            var times = Helpers.Generate(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
+            level.GamePanel.SetClockTimes(times);
+            _theTime = times[_rnd.Next(0, 3)];
+            level.GamePanel.SetQuestionTime(_theTime);
+            GameClockPanel.Content = _level.GamePanel.View;
         }
     }
 }

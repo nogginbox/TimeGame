@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1 description, 4 analogue clocks -->
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="clr-namespace:Garsonix.TimeGame.Controls"
+             mc:Ignorable="d"
+             x:Class="Garsonix.TimeGame.Controls.GameClocksPanel1">
+    <ContentView.Content>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label x:Name="TimeQuestion">Question</Label>
+
+            <!-- Top Left -->
+            <ext:ClockAnswerButton x:Name="Clock1" Grid.Row="1"
+                    Clicked="ClockClicked"
+                    WidthRequest="400" HeightRequest="400"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Top Right -->
+            <ext:ClockAnswerButton x:Name="Clock2" Grid.Row="1" Grid.Column="1"
+                    Clicked="ClockClicked"
+                    WidthRequest="400" HeightRequest="400"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Bottom Left -->
+            <ext:ClockAnswerButton x:Name="Clock3" Grid.Row="2"
+                    Clicked="ClockClicked"
+                    WidthRequest="400" HeightRequest="400"
+                    HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Bottom Right -->
+            <ext:ClockAnswerButton x:Name="Clock4" Grid.Row="2" Grid.Column="1"
+                    Clicked="ClockClicked"
+                    WidthRequest="400" HeightRequest="400"
+                    HorizontalOptions="Center" VerticalOptions="Center"  />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
