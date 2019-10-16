@@ -4,7 +4,7 @@ namespace Garsonix.TimeGame.Controls.Events
 {
     public class AnsweredEventArgs<T> : EventArgs
     {
-        public readonly T Answer;
+        public T Answer { get; private set; }
 
         public AnsweredEventArgs(T answer)
         {

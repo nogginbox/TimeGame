@@ -20,6 +20,10 @@ namespace Garsonix.TimeGame.Services
 
         public Level<LocalTime> Next(Level<LocalTime> level)
         {
+            if(level == null)
+            {
+                throw new NullReferenceException("LevelFactory.Next needs a level to work out next level");
+            }
             var nextLevelDifficulty = level.Percentage > 70
                 ? level.Difficulty + 1
                 : level.Difficulty;

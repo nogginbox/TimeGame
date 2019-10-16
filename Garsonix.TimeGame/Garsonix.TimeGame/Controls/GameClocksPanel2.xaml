@@ -15,13 +15,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="60" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
-            <Label Grid.ColumnSpan="2">What time is it?</Label>
+            <Label Grid.ColumnSpan="2" FontSize="Medium">What time is it?</Label>
 
             <ext:Clock x:Name="Clock" Grid.Row="1" Grid.ColumnSpan="2"
                     WidthRequest="400" HeightRequest="400"
@@ -29,23 +29,23 @@
 
             <!-- Top Left -->
             <ext:AnswerButton x:Name="Time1" Grid.Row="2"
-                    Clicked="ClockClicked"
-                    HorizontalOptions="Center" VerticalOptions="Center" />
+                    Clicked="ClockClicked" FontSize="Medium"
+                    HorizontalOptions="Fill" VerticalOptions="Fill" />
             
             <!-- Top Right -->
             <ext:AnswerButton x:Name="Time2" Grid.Row="2" Grid.Column="1"
-                    Clicked="ClockClicked"
-                    HorizontalOptions="Center" VerticalOptions="Center" />
+                    Clicked="ClockClicked" FontSize="Medium"
+                    HorizontalOptions="Fill" VerticalOptions="Fill" />
 
             <!-- Bottom Left -->
             <ext:AnswerButton x:Name="Time3" Grid.Row="3"
-                    Clicked="ClockClicked"
-                    HorizontalOptions="Center" VerticalOptions="Center" />
+                    Clicked="ClockClicked" FontSize="Medium"
+                    HorizontalOptions="Fill" VerticalOptions="Fill" />
 
             <!-- Bottom Right -->
             <ext:AnswerButton x:Name="Time4" Grid.Row="3" Grid.Column="1"
-                    Clicked="ClockClicked"
-                    HorizontalOptions="Center" VerticalOptions="Center"  />
+                    Clicked="ClockClicked" FontSize="Medium"
+                    HorizontalOptions="Fill" VerticalOptions="Fill"  />
         </Grid>
     </ContentView.Content>
 </ContentView>
