@@ -17,7 +17,7 @@ namespace Garsonix.TimeGame.Services
         {
             var maxHours = justMorning ? 11 : 23;
             var hour = _rnd.Next(0, maxHours);
-            var mins = possibleMinutes.Count > 0
+            var mins = possibleMinutes?.Count > 0
                 ? possibleMinutes[_rnd.Next(0, possibleMinutes.Count)]
                 : 0;
             return new LocalTime(hour, mins);

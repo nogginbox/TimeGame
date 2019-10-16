@@ -88,7 +88,7 @@ namespace Garsonix.TimeGame
 
         private void SetTimes(Level<LocalTime> level)
         {
-            var times = Helpers.Generate(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
+            var times = Helpers.GenerateDistinct(() => _timeFactory.Random(_level.PossibleMinutes, true), 4).ToList();
             level.GamePanel.SetClockTimes(times);
             _theTime = times[_rnd.Next(0, 3)];
             level.GamePanel.SetQuestionTime(_theTime);

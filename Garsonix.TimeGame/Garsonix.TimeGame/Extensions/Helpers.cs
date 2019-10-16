@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Garsonix.TimeGame.Extensions
@@ -11,6 +12,13 @@ namespace Garsonix.TimeGame.Extensions
             {
                 yield return generator();
             }
+        }
+
+        public static IEnumerable<T> GenerateDistinct<T>(this Func<T> generator, int count)
+        {
+            var maxTryCount = (count + 5) * 20;
+            var items = Generate(generator, maxTryCount).Distinct().Take(count);
+            return items;
         }
     }
 }
