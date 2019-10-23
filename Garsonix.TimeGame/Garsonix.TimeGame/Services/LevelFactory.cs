@@ -18,7 +18,7 @@ namespace Garsonix.TimeGame.Services
             _rand = new Random();
         }
 
-        public Level<LocalTime> Next(Level<LocalTime> level)
+        public Level<LocalTime> NextLevel(Level<LocalTime> level)
         {
             if(level == null)
             {
@@ -27,10 +27,10 @@ namespace Garsonix.TimeGame.Services
             var nextLevelDifficulty = level.Percentage > 70
                 ? level.Difficulty + 1
                 : level.Difficulty;
-            return Create(nextLevelDifficulty);
+            return CreateLevel(nextLevelDifficulty);
         }
 
-        public Level<LocalTime> Create(int difficulty)
+        public Level<LocalTime> CreateLevel(int difficulty)
         {
             var gamePanel = GetGamePanel(difficulty);
             switch(difficulty)

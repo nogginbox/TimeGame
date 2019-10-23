@@ -32,7 +32,7 @@ namespace Garsonix.TimeGame
             var panels = SetupGamePanels();
             _levelFactory = new TimeLevelFactory(panels);
             _timeFactory = new TimeFactory();
-            _level = _levelFactory.Create(1);
+            _level = _levelFactory.CreateLevel(1);
 
             SetTimes(_level);
         }
@@ -77,7 +77,7 @@ namespace Garsonix.TimeGame
 
                     // Increase level
                     // Todo:
-                    _level = _levelFactory.Next(_level);
+                    _level = _levelFactory.NextLevel(_level);
                 }
                 
                 // Start next level

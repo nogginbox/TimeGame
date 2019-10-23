@@ -4,8 +4,8 @@ namespace Garsonix.TimeGame.Services
 {
     public interface ILevelFactory<T>
     {
-        Level<T> Next(Level<T> level);
+        Level<T> NextLevel(Level<T> level);
 
-        Level<T> Create(int difficulty);
+        Level<T> CreateLevel(int difficulty);
     }
 }
