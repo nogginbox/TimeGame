@@ -1,4 +1,5 @@
-﻿using Garsonix.TimeGame.Controls.Events;
+﻿#pragma warning disable CA1303 // Do not pass literals as localized parameters
+using Garsonix.TimeGame.Controls.Events;
 using Garsonix.TimeGame.Controls.Interfaces;
 using NodaTime;
 using System;
@@ -9,7 +10,6 @@ using Xamarin.Forms.Xaml;
 
 namespace Garsonix.TimeGame.Controls
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GameClocksPanel2 : ContentView, IGamePanel<LocalTime>
     {

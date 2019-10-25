@@ -5,6 +5,7 @@ using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
 using NodaTime;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,7 +64,9 @@ namespace Garsonix.TimeGame
             var msg = isCorrect
                 ? (text: "Well done", button: "Next")
                 : (text: $"No. That clock says {e.Answer.ToWordyString()}", button: "Try again");
-            await DisplayAlert("The Time", msg.text, msg.button);
+
+
+            await DisplayAlert("The Time", msg.text, msg.button).ConfigureAwait(true);
 
             if (isCorrect)
             {
@@ -71,9 +74,8 @@ namespace Garsonix.TimeGame
                 if(_level.IsComplete)
                 {
                     // Show level score
-                    // Todo:
-                    // * Show nicer overlay screen with stars for level on
-                    await DisplayAlert($"Level {_level.Difficulty}", $"You scored {_level.Percentage}%", "Continue");
+                    var popup = new LevelDonePopup(_level);
+                    await PopupNavigation.Instance.PushAsync(popup).ConfigureAwait(true);
 
                     // Increase level
                     // Todo:

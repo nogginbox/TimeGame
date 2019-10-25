@@ -1,4 +1,5 @@
-﻿using Garsonix.TimeGame.Controls.Interfaces;
+﻿#pragma warning disable CA1303 // Do not pass literals as localized parameters
+using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Models;
 using NodaTime;
 using System;
