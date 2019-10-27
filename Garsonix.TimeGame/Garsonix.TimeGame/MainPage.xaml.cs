@@ -1,5 +1,6 @@
 ﻿using Garsonix.TimeGame.Controls;
 using Garsonix.TimeGame.Controls.Events;
+using Garsonix.TimeGame.Controls.Popups;
 using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
@@ -61,15 +62,11 @@ namespace Garsonix.TimeGame
             var answerButton = sender as IAnswerButton;
             answerButton.SetAnswerIs(isCorrect);
 
-            var msg = isCorrect
-                ? (text: "Well done", button: "Next")
-                : (text: $"No. That clock says {e.Answer.ToWordyString()}", button: "Try again");
-
-
-            await DisplayAlert("The Time", msg.text, msg.button).ConfigureAwait(true);
-
             if (isCorrect)
             {
+                var correctPopup = new CorrectPopup(e.Answer);
+                await PopupNavigation.Instance.PushAsync(correctPopup).ConfigureAwait(true);
+
                 _level.RightAfter(_tries, 4);
                 if(_level.IsComplete)
                 {
@@ -85,6 +82,11 @@ namespace Garsonix.TimeGame
                 // Start next level
                 SetTimes(_level);
                 _tries = 0;
+            }
+            else
+            {
+                var wrongPopup = new WrongPopup(e.Answer);
+                await PopupNavigation.Instance.PushAsync(wrongPopup).ConfigureAwait(true);
             }
         }
 

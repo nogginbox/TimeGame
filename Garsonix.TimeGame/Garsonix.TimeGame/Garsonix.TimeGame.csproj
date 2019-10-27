@@ -42,13 +42,19 @@
     <Compile Update="Controls\GameClocksPanel1.xaml.cs">
       <DependentUpon>GameClocksPanel1.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\Popups\WrongPopup.xaml.cs">
+      <DependentUpon>WrongPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\Popups\CorrectPopup.xaml.cs">
+      <DependentUpon>CorrectPopup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Controls\GameClocksPanel1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\LevelDonePopup.xaml">
+    <EmbeddedResource Update="Controls\Popups\LevelDonePopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
