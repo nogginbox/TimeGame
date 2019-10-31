@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:PopupBase 
+<pop:PopupBase 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-    xmlns:local="clr-namespace:Garsonix.TimeGame.Controls.Popups"
+    xmlns:local="clr-namespace:Garsonix.TimeGame.Controls"
+    xmlns:pop="clr-namespace:Garsonix.TimeGame.Controls.Popups"
     x:Class="Garsonix.TimeGame.Controls.Popups.LevelDonePopup"
     BackgroundColor="White">
     <!--You can set an animation in the xaml file or in the csharp code behind-->
@@ -27,6 +28,14 @@
         Padding="20, 20, 20, 20">
 
         <Label x:Name="Message">Well done</Label>
+        <StackLayout Orientation="Horizontal">
+            <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
+            <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
+            <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
+            <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
+            <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
+        </StackLayout>
+        
         <Button Text="Continue" Clicked="OnContinue" />
     </StackLayout>
-</local:PopupBase>
+</pop:PopupBase>

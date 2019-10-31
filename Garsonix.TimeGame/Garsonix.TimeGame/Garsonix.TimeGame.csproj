@@ -13,12 +13,14 @@
     <None Remove="Content\Images\clock.svg" />
     <None Remove="Content\Images\clock_big_hand.svg" />
     <None Remove="Content\Images\clock_little_hand.svg" />
+    <None Remove="Content\Images\star.svg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Content\Images\clock.svg" />
     <EmbeddedResource Include="Content\Images\clock_big_hand.svg" />
     <EmbeddedResource Include="Content\Images\clock_little_hand.svg" />
+    <EmbeddedResource Include="Content\Images\star.svg" />
   </ItemGroup>
 
   <ItemGroup>
