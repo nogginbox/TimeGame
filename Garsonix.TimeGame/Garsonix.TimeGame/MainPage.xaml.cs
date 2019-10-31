@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Garsonix.TimeGame
 {
@@ -64,18 +66,15 @@ namespace Garsonix.TimeGame
 
             if (isCorrect)
             {
-                var correctPopup = new CorrectPopup(e.Answer);
-                await PopupNavigation.Instance.PushAsync(correctPopup).ConfigureAwait(true);
+                await ShowPopup((c) => new CorrectPopup(e.Answer, c)).ConfigureAwait(true);
 
                 _level.RightAfter(_tries, 4);
                 if(_level.IsComplete)
                 {
                     // Show level score
-                    var popup = new LevelDonePopup(_level);
-                    await PopupNavigation.Instance.PushAsync(popup).ConfigureAwait(true);
+                    await ShowPopup((c) => new LevelDonePopup(_level, c)).ConfigureAwait(true);
 
                     // Increase level
-                    // Todo:
                     _level = _levelFactory.NextLevel(_level);
                 }
                 
@@ -85,8 +84,7 @@ namespace Garsonix.TimeGame
             }
             else
             {
-                var wrongPopup = new WrongPopup(e.Answer);
-                await PopupNavigation.Instance.PushAsync(wrongPopup).ConfigureAwait(true);
+                await ShowPopup((c) => new WrongPopup(e.Answer, c)).ConfigureAwait(true);
             }
         }
 
@@ -97,6 +95,22 @@ namespace Garsonix.TimeGame
             _theTime = times[_rnd.Next(0, 3)];
             level.GamePanel.SetQuestionTime(_theTime);
             GameClockPanel.Content = _level.GamePanel.View;
+        }
+
+        private async Task ShowPopup(Func<CancellationTokenSource, Page> createPopup)
+        {
+            using (var _stateAsyncLock = new SemaphoreSlim(0))
+            {
+                var canceller = new CancellationTokenSource();
+                var correctPopup = createPopup(canceller);
+                await Navigation.PushModalAsync(correctPopup).ConfigureAwait(true);
+                try
+                {
+                    await _stateAsyncLock.WaitAsync(canceller.Token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { }
+                canceller.Dispose();
+            }
         }
     }
 }

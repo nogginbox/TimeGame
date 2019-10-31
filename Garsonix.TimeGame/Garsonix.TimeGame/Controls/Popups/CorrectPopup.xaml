@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:PopupPage 
+<local:PopupBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:Garsonix.TimeGame.Controls.Popups"
     x:Class="Garsonix.TimeGame.Controls.Popups.CorrectPopup"
     BackgroundColor="White">
     <!--You can set an animation in the xaml file or in the csharp code behind-->
@@ -28,4 +29,4 @@
         <Label x:Name="Message">Correct</Label>
         <Button Text="Next" Clicked="OnContinue" />
     </StackLayout>
-</pages:PopupPage>
+</local:PopupBase>

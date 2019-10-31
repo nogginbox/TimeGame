@@ -1,17 +1,15 @@
 ﻿#pragma warning disable CA1303 // Do not pass literals as localized parameters
-using System;
 using Garsonix.TimeGame.Extensions;
 using NodaTime;
-using Rg.Plugins.Popup.Pages;
-using Rg.Plugins.Popup.Services;
+using System.Threading;
 using Xamarin.Forms.Xaml;
 
 namespace Garsonix.TimeGame.Controls.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CorrectPopup : PopupPage
+    public partial class CorrectPopup : PopupBase
     {
-        public CorrectPopup(LocalTime correctTime)
+        public CorrectPopup(LocalTime correctTime, CancellationTokenSource canceller) : base(canceller)
         {
             InitializeComponent();
             if(correctTime == null)
@@ -21,11 +19,6 @@ namespace Garsonix.TimeGame.Controls.Popups
             }
 
             Message.Text = $"Correct!! That clock does say {correctTime.ToWordyString()}";
-        }
-
-        private async void OnContinue(object sender, EventArgs e)
-        {
-            await PopupNavigation.Instance.PopAsync().ConfigureAwait(true);
         }
     }
 }
