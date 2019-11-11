@@ -22,11 +22,11 @@
     <!--You can use any elements here which are extended from Xamarin.Forms.View-->
     <StackLayout 
         VerticalOptions="Center" 
-        HorizontalOptions="Center" 
+        HorizontalOptions="FillAndExpand" 
         Padding="20, 20, 20, 20"
         BackgroundColor="White">
 
-        <Label x:Name="Message">Wrong</Label>
-        <Button Text="Try again" Clicked="OnContinue" />
+        <Label x:Name="Message" FontSize="Large" HorizontalOptions="Center">Wrong</Label>
+        <Button Text="Try again" FontSize="Medium" Margin="20" Padding="10" HorizontalOptions="Center" Clicked="OnContinue" />
     </StackLayout>
 </local:PopupBase>

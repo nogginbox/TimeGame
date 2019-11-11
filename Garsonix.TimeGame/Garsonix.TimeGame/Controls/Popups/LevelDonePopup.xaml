@@ -27,7 +27,7 @@
         Padding="20, 20, 20, 20"
         BackgroundColor="White">
 
-        <Label x:Name="Message">Well done</Label>
+        <Label x:Name="Message" FontSize="Large" HorizontalOptions="Center">Well done</Label>
         <StackLayout Orientation="Horizontal">
             <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
             <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
@@ -35,7 +35,7 @@
             <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
             <local:SvgImage ResourceId="Garsonix.TimeGame.Content.Images.star.svg" />
         </StackLayout>
-        
-        <Button Text="Continue" Clicked="OnContinue" />
+
+        <Button Text="Continue" FontSize="Medium" Margin="20" Padding="10" HorizontalOptions="Center" Clicked="OnContinue" />
     </StackLayout>
 </pop:PopupBase>

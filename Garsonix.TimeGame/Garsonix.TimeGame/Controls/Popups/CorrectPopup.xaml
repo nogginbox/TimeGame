@@ -24,9 +24,8 @@
             Grid.Row="1" Grid.Column="1"
             BackgroundColor="White">
 
-            <Label x:Name="Message">Correct</Label>
-            <Button Text="Next" Clicked="OnContinue" />
-        </StackLayout>
+            <Label x:Name="Message" FontSize="Large" HorizontalOptions="Center">Correct</Label>
+            <Button Text="Try again" FontSize="Medium" Margin="20" Padding="10" HorizontalOptions="Center" Clicked="OnContinue" />
+    </StackLayout>
 
-    
 </local:PopupBase>
