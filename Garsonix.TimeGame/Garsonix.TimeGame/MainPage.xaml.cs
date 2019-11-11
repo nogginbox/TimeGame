@@ -14,6 +14,7 @@ using System.Linq;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Threading;
+using Rg.Plugins.Popup.Pages;
 
 namespace Garsonix.TimeGame
 {
@@ -97,13 +98,13 @@ namespace Garsonix.TimeGame
             GameClockPanel.Content = _level.GamePanel.View;
         }
 
-        private async Task ShowPopup(Func<CancellationTokenSource, Page> createPopup)
+        private async Task ShowPopup(Func<CancellationTokenSource, PopupPage> createPopup)
         {
             using (var _stateAsyncLock = new SemaphoreSlim(0))
             {
                 var canceller = new CancellationTokenSource();
                 var correctPopup = createPopup(canceller);
-                await Navigation.PushModalAsync(correctPopup).ConfigureAwait(true);
+                await PopupNavigation.Instance.PushAsync(correctPopup).ConfigureAwait(true);
                 try
                 {
                     await _stateAsyncLock.WaitAsync(canceller.Token).ConfigureAwait(false);

@@ -5,8 +5,7 @@
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
     xmlns:local="clr-namespace:Garsonix.TimeGame.Controls.Popups"
-    x:Class="Garsonix.TimeGame.Controls.Popups.WrongPopup"
-    BackgroundColor="White">
+    x:Class="Garsonix.TimeGame.Controls.Popups.WrongPopup">
     <!--You can set an animation in the xaml file or in the csharp code behind-->
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation 
@@ -24,7 +23,8 @@
     <StackLayout 
         VerticalOptions="Center" 
         HorizontalOptions="Center" 
-        Padding="20, 20, 20, 20">
+        Padding="20, 20, 20, 20"
+        BackgroundColor="White">
 
         <Label x:Name="Message">Wrong</Label>
         <Button Text="Try again" Clicked="OnContinue" />
