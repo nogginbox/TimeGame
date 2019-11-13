@@ -21,9 +21,7 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
     <!--You can use any elements here which are extended from Xamarin.Forms.View-->
-    <StackLayout 
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" 
+    <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand"
         Padding="20, 20, 20, 20"
         BackgroundColor="White">
 
