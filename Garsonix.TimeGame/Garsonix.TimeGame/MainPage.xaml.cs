@@ -1,15 +1,20 @@
 ﻿using Garsonix.TimeGame.Controls;
 using Garsonix.TimeGame.Controls.Events;
+using Garsonix.TimeGame.Controls.Popups;
 using Garsonix.TimeGame.Controls.Interfaces;
 using Garsonix.TimeGame.Extensions;
 using Garsonix.TimeGame.Models;
 using Garsonix.TimeGame.Services;
 using NodaTime;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using System.Threading;
+using Rg.Plugins.Popup.Pages;
 
 namespace Garsonix.TimeGame
 {
@@ -60,29 +65,27 @@ namespace Garsonix.TimeGame
             var answerButton = sender as IAnswerButton;
             answerButton.SetAnswerIs(isCorrect);
 
-            var msg = isCorrect
-                ? (text: "Well done", button: "Next")
-                : (text: $"No. That clock says {e.Answer.ToWordyString()}", button: "Try again");
-            await DisplayAlert("The Time", msg.text, msg.button);
-
             if (isCorrect)
             {
+                await ShowPopup((c) => new CorrectPopup(e.Answer, c)).ConfigureAwait(true);
+
                 _level.RightAfter(_tries, 4);
                 if(_level.IsComplete)
                 {
                     // Show level score
-                    // Todo:
-                    // * Show nicer overlay screen with stars for level on
-                    await DisplayAlert($"Level {_level.Difficulty}", $"You scored {_level.Percentage}%", "Continue");
+                    await ShowPopup((c) => new LevelDonePopup(_level, c)).ConfigureAwait(true);
 
                     // Increase level
-                    // Todo:
                     _level = _levelFactory.NextLevel(_level);
                 }
                 
                 // Start next level
                 SetTimes(_level);
                 _tries = 0;
+            }
+            else
+            {
+                await ShowPopup((c) => new WrongPopup(e.Answer, c)).ConfigureAwait(true);
             }
         }
 
@@ -93,6 +96,22 @@ namespace Garsonix.TimeGame
             _theTime = times[_rnd.Next(0, 3)];
             level.GamePanel.SetQuestionTime(_theTime);
             GameClockPanel.Content = _level.GamePanel.View;
+        }
+
+        private async Task ShowPopup(Func<CancellationTokenSource, PopupPage> createPopup)
+        {
+            using (var _stateAsyncLock = new SemaphoreSlim(0))
+            {
+                var canceller = new CancellationTokenSource();
+                var correctPopup = createPopup(canceller);
+                await PopupNavigation.Instance.PushAsync(correctPopup).ConfigureAwait(true);
+                try
+                {
+                    await _stateAsyncLock.WaitAsync(canceller.Token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { }
+                canceller.Dispose();
+            }
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿using Garsonix.TimeGame.Controls.Events;
+﻿#pragma warning disable CA1303 // Do not pass literals as localized parameters
+using Garsonix.TimeGame.Controls.Events;
 using Garsonix.TimeGame.Controls.Interfaces;
 using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Garsonix.TimeGame.Controls
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GameClocksPanel2 : ContentView, IGamePanel<LocalTime>
     {
@@ -47,11 +48,14 @@ namespace Garsonix.TimeGame.Controls
                 throw new ArgumentException($"This method required an array of 4 times (I have {times?.Count ?? 0}, this is not good enough.)");
             }
 
+            // Show times in order to make finding time easier
+            times = times.OrderBy(t => t).ToList();
+
             for (var i = 0; i < 4; i++)
             {
                 _answerButtons[i].Reset();
                 _answerButtons[i].CommandParameter = times[i];
-                _answerButtons[i].Text = times[i].ToString("hh:mm", CultureInfo.InvariantCulture);
+                _answerButtons[i].Text = times[i].ToString("h:mm", CultureInfo.InvariantCulture);
             }
         }
 
